@@ -25,7 +25,7 @@ public class UserController {
     public String registrarUsuario(@ModelAttribute User user, Model model) {
         userService.registrarUsuario(user);
         model.addAttribute("mensaje", "Usuario registrado con éxito");
-        return "login";
+        return "redirect:/login";
     }
 
     @GetMapping("/login")
@@ -36,7 +36,7 @@ public class UserController {
     @PostMapping("/login")
     public String validarLogin(@RequestParam String email, @RequestParam String password, Model model) {
         if (userService.validarLogin(email, password)) {
-            return "redirect:/";
+            return "redirect:/menu";
         } else {
             model.addAttribute("error", "Credenciales incorrectas");
             return "login";

@@ -15,7 +15,7 @@ public class PedidoController {
         this.tacoService = tacoService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/menu")
     public String mostrarMenu(Model model) {
         model.addAttribute("tacos", tacoService.listarTacos());
         return "menu";
