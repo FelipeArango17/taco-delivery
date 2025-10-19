@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Taco Delivery</title>
+</head>
+<body>
+<h1>Menú de Tacos</h1>
+<form th:action="@{/carrito}" method="post">
+    <div th:each="taco : ${tacos}">
+        <p th:text="${taco.nombre}"></p>
+        <p th:text="${taco.precio} + ' MXN'"></p>
+        <input type="checkbox" th:value="${taco.nombre}" name="seleccionados"/>
+    </div>
+    <button type="submit">Agregar al carrito</button>
+</form>
+</body>
+</html>
