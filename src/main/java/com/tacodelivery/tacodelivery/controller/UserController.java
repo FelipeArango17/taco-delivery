@@ -17,7 +17,7 @@ public class UserController {
 
     @GetMapping("/registro")
     public String mostrarFormularioRegistro(Model model) {
-        model.addAttribute("user", new User("", "", ""));
+        model.addAttribute("user", new User("", "", "", "", ""));
         return "registro";
     }
 
@@ -30,7 +30,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String mostrarLogin(Model model) {
-        model.addAttribute("user", new User("", "", ""));
+        model.addAttribute("user", new User("", "", "", "", ""));
         return "login";
     }
 
