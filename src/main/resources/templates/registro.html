@@ -1,19 +1,43 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
+    <meta charset="UTF-8">
     <title>Registro</title>
-    <link rel="stylesheet" th:href="@{/css/registro.css}">
+    <link rel="stylesheet" href="/registro.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
-<form th:action="@{/registro}" method="post" th:object="${user}">
-    <h2>Registro de Usuario</h2>
-    <label>Nombre:</label>
-    <input type="text" th:field="*{nombre}" required>
-    <label>Email:</label>
-    <input type="email" th:field="*{email}" required>
-    <label>Contraseña:</label>
-    <input type="password" th:field="*{password}" required>
-    <button type="submit">Registrar</button>
-</form>
+<div class="container active" id="container">
+
+    <!-- FORMULARIO DE REGISTRO -->
+    <div class="form-container sign-up">
+        <form th:action="@{/registro}" method="post" th:object="${user}">
+            <h1>Crear Cuenta</h1>
+            <input type="text" th:field="*{nombre}" placeholder="Nombre" required>
+            <input type="email" th:field="*{email}" placeholder="Email" required>
+            <input type="password" th:field="*{password}" placeholder="Contraseña" required>
+            <button type="submit">Registrarse</button>
+        </form>
+        <p style="text-align:center; margin-top:15px;">
+            ¿Ya tienes cuenta? <a href="/login">Inicia sesión aquí</a>
+        </p>
+    </div>
+
+    <!-- PANEL MORADO -->
+    <div class="toggle-container">
+        <div class="toggle">
+            <div class="toggle-panel toggle-left">
+                <h1>¡Hola, amigo!</h1>
+                <p>Regístrate con tus datos personales para comenzar</p>
+            </div>
+            <div class="toggle-panel toggle-right">
+                <h1>¡Bienvenido de nuevo!</h1>
+                <p>Si ya tienes cuenta, inicia sesión con tus credenciales</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/js/auth.js"></script>
 </body>
 </html>

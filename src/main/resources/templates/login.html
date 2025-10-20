@@ -1,29 +1,54 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Iniciar Sesión</title>
-    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <title>Login</title>
+    <link rel="stylesheet" href="/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
-<form th:action="@{/login}" method="post" th:object="${user}">
-    <h2>Iniciar Sesión</h2>
+<div class="container" id="container">
 
-    <label>Email:</label>
-    <input type="email" th:field="*{email}" placeholder="ejemplo@correo.com" required>
+    <!-- FORMULARIO DE REGISTRO -->
+    <div class="form-container sign-up">
+        <form th:action="@{/registro}" method="post" th:object="${user}">
+            <h1>Crear Cuenta</h1>
+            <input type="text" th:field="*{nombre}" placeholder="Nombre" required>
+            <input type="email" th:field="*{email}" placeholder="Email" required>
+            <input type="password" th:field="*{password}" placeholder="Contraseña" required>
+            <button type="submit">Registrarse</button>
+        </form>
+    </div>
 
-    <label>Contraseña:</label>
-    <input type="password" th:field="*{password}" placeholder="********" required>
+    <!-- FORMULARIO DE LOGIN -->
+    <div class="form-container sign-in">
+        <form th:action="@{/login}" method="post" th:object="${user}">
+            <h1>Iniciar Sesión</h1>
+            <span>o usa tu email y contraseña</span>
+            <input type="email" th:field="*{email}" placeholder="Email" required>
+            <input type="password" th:field="*{password}" placeholder="Contraseña" required>
+            <button type="submit">Entrar</button>
+            <p th:if="${error}" th:text="${error}"
+               style="color:red; text-align:center; font-weight:bold; margin-top:10px;"></p>
+        </form>
+    </div>
 
-    <button type="submit">Entrar</button>
+    <div class="toggle-container">
+        <div class="toggle">
+            <div class="toggle-panel toggle-left">
+                <h1>¡Bienvenido de nuevo!</h1>
+                <p>Para mantenerte conectado, inicia sesión con tus credenciales</p>
+                <button class="hidden" id="login">Iniciar Sesión</button>
+            </div>
+            <div class="toggle-panel toggle-right">
+                <h1>¡Hola, amigo!</h1>
+                <p>Regístrate con tus datos personales para comenzar</p>
+                <a href="/registro" class="hidden" id="register">Registrarse</a>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <p style="text-align:center; margin-top:10px;">
-        ¿No tienes cuenta?
-        <a th:href="@{/registro}" style="color:#ff7b00; font-weight:bold;">Regístrate aquí</a>
-    </p>
-
-    <p th:if="${error}" th:text="${error}"
-       style="color:red; text-align:center; font-weight:bold; margin-top:10px;"></p>
-</form>
+<script src="/static/js/login.js"></script>
 </body>
 </html>
