@@ -20,9 +20,6 @@
             <input type="password" th:field="*{password}" placeholder="Contraseña" required>
             <button type="submit">Registrarse</button>
         </form>
-        <p style="text-align:center; margin-top:15px;">
-            ¿Ya tienes cuenta? <a href="/login">Inicia sesión aquí</a>
-        </p>
     </div>
 
     <!-- PANEL MORADO -->
@@ -30,16 +27,12 @@
         <div class="toggle">
             <div class="toggle-panel toggle-left">
                 <div class="logo-container">
-                    <img th:src="@{/static.images/TacosDeliveryLogo.png}" alt="Logo Tacos Delivery">
+                    <img th:src="@{/static.images/LogoTacos.png}" alt="Logo Tacos Delivery">
                 </div>
                 <h1>¡Bienvenido a Tacos Delivery!</h1>
                 <p>Regístrate con tus datos personales para comenzar</p>
             </div>
-            <div class="toggle-panel toggle-right">
-                <h1>¡Bienvenido de nuevo!</h1>
-                <p>Si ya tienes cuenta, inicia sesión con tus credenciales</p>
-                <a href="/login" class="hidden" id="register">Registrarse</a>
-            </div>
+
         </div>
     </div>
 </div>

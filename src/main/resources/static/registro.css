@@ -7,15 +7,16 @@
         font-family: 'Montserrat', sans-serif;
     }
 
-    body{
-        background-color: #c9d6ff;
-        background: linear-gradient(to right, #e2e2e2, #c9d6ff);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        height: 100vh;
-    }
+    body {
+            background: url('/static.images/Fondov2.png') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
+            font-family: 'Montserrat', sans-serif;
+        }
 
     .container{
         background-color: #fff;
@@ -208,3 +209,38 @@
     .container.active .toggle-right{
         transform: translateX(200%);
     }
+
+    .logo-container {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-bottom: 20px;
+        border: 3px solid #fff; /* borde blanco opcional */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff; /* si el logo tiene fondo transparente */
+    }
+
+    .logo-container img {
+        width: 120%;
+        height: 120%;
+        object-fit: cover;
+    }
+
+    a#register {
+            display: inline-block;
+            background-color: transparent;
+            color: #fff;
+            padding: 10px 45px;
+            border: 2px solid #fff;
+            border-radius: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
