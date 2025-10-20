@@ -29,13 +29,14 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String mostrarLogin() {
+    public String mostrarLogin(Model model) {
+        model.addAttribute("user", new User("", "", ""));
         return "login";
     }
 
     @PostMapping("/login")
-    public String validarLogin(@RequestParam String email, @RequestParam String password, Model model) {
-        if (userService.validarLogin(email, password)) {
+    public String validarLogin(@ModelAttribute User user, Model model) {
+        if (userService.validarLogin(user.getEmail(), user.getPassword())) {
             return "redirect:/menu";
         } else {
             model.addAttribute("error", "Credenciales incorrectas");
