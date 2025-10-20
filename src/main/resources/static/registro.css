@@ -8,7 +8,7 @@
     }
 
     body {
-            background: url('/static.images/Fondov2.png') no-repeat center center fixed;
+            background: url('/static.images/Fondo.png') no-repeat center center fixed;
             background-size: cover;
             display: flex;
             align-items: center;
