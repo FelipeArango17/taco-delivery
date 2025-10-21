@@ -24,7 +24,18 @@
              th:alt="'Taco ' + ${taco.nombre}" class="taco-img">
 
         <h2 th:text="${taco.nombre}"></h2>
-        <p>Selecciona el tamaño después en el carrito</p>
+        <p th:switch="${taco.nombre}">
+            <span th:case="'Tacos al Pastor'">Deliciosos tacos con carne marinada y piña.</span>
+            <span th:case="'Tacos de Carne Asada'">Clásicos con carne asada al carbón.</span>
+            <span th:case="'Tacos de Pollo'">Jugosos tacos de pollo con especias.</span>
+            <span th:case="'Tacos de Chorizo'">Exquisito Chorizo a la parrilla.</span>
+            <span th:case="'Tacos de Pescado'">Suaves y deliciosos.</span>
+            <span th:case="'Tacos de Veganos'">Saludables para tu forma de vida.</span>
+            <span th:case="'Tacos de Barbacoa'">Barbacoa bañada en salsa que gustes.</span>
+            <span th:case="'Tacos de Camaron'">Torrente de sabor.</span>
+            <span th:case="'Tacos de Mixtos'">Lo que quieras en una sola orden.</span>
+            <span th:case="'Tacos de Cochinita Pibil'">Jugosos y sabrosos, los mejores.</span>
+        </p>
 
         <form th:action="@{/menu/agregar}" method="post">
             <input type="hidden" name="nombre" th:value="${taco.nombre}">
