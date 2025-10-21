@@ -37,7 +37,7 @@ public class UserController {
     @PostMapping("/login")
     public String validarLogin(@ModelAttribute User user, Model model) {
         if (userService.validarLogin(user.getEmail(), user.getPassword())) {
-            return "redirect:/menu";
+            return "redirect:/index";
         } else {
             model.addAttribute("error", "Credenciales incorrectas");
             return "login";

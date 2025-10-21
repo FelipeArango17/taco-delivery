@@ -35,9 +35,9 @@ public class TacoService {
         catalogo.add(new Taco("Tacos de Pescado", "Extragrande", 23000));
 
         // Tacos Veganos
-        catalogo.add(new Taco("Tacos Veganos", "Pequeño", 10000));
-        catalogo.add(new Taco("Tacos Veganos", "Normal", 14000));
-        catalogo.add(new Taco("Tacos Veganos", "Extragrande", 19000));
+        catalogo.add(new Taco("Tacos de Veganos", "Pequeño", 10000));
+        catalogo.add(new Taco("Tacos de Veganos", "Normal", 14000));
+        catalogo.add(new Taco("Tacos de Veganos", "Extragrande", 19000));
 
         // Tacos de Barbacoa
         catalogo.add(new Taco("Tacos de Barbacoa", "Pequeño", 12000));
@@ -45,14 +45,14 @@ public class TacoService {
         catalogo.add(new Taco("Tacos de Barbacoa", "Extragrande", 24000));
 
         // Tacos de Camarón
-        catalogo.add(new Taco("Tacos de Camarón", "Pequeño", 13000));
-        catalogo.add(new Taco("Tacos de Camarón", "Normal", 19000));
-        catalogo.add(new Taco("Tacos de Camarón", "Extragrande", 25000));
+        catalogo.add(new Taco("Tacos de Camaron", "Pequeño", 13000));
+        catalogo.add(new Taco("Tacos de Camaron", "Normal", 19000));
+        catalogo.add(new Taco("Tacos de Camaron", "Extragrande", 25000));
 
         // Tacos Mixtos
-        catalogo.add(new Taco("Tacos Mixtos", "Pequeño", 14000));
-        catalogo.add(new Taco("Tacos Mixtos", "Normal", 20000));
-        catalogo.add(new Taco("Tacos Mixtos", "Extragrande", 26000));
+        catalogo.add(new Taco("Tacos de Mixtos", "Pequeño", 14000));
+        catalogo.add(new Taco("Tacos de Mixtos", "Normal", 20000));
+        catalogo.add(new Taco("Tacos de Mixtos", "Extragrande", 26000));
 
         // Tacos de Cochinita Pibil
         catalogo.add(new Taco("Tacos de Cochinita Pibil", "Pequeño", 13000));
@@ -63,4 +63,5 @@ public class TacoService {
     public List<Taco> listarTacos() {
         return catalogo;
     }
+
 }

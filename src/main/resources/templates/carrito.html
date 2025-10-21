@@ -17,8 +17,9 @@
 
 <div class="carrito-container" th:if="${!#lists.isEmpty(carrito)}">
     <div class="taco-item" th:each="taco, iterStat : ${carrito}">
-        <img th:src="@{'/images/' + ${#strings.replace(taco.nombre, ' ', '_').toLowerCase()} + '.jpg'}"
-             alt="Taco" class="taco-img">
+        <!-- ✅ Mismo sistema de nombre limpio -->
+        <img th:src="@{|/static.images/tacos-${#strings.replace(#strings.replace(#strings.replace(taco.nombre.toLowerCase(), 'tacos de ', ''), 'tacos al ', ''), ' ', '-')}.png|}"
+             th:alt="'Taco ' + ${taco.nombre}" class="taco-img">
 
         <div class="taco-info">
             <h2 th:text="${taco.nombre}"></h2>
