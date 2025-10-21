@@ -5,12 +5,14 @@ public class Taco {
     private String nombre;
     private String tamaño;
     private double precio;
+    private int cantidad;
 
     // Constructor
     public Taco(String nombre, String tamaño, double precio) {
         this.nombre = nombre;
         this.tamaño = tamaño;
         this.precio = precio;
+        this.cantidad = 1;
     }
 
     // Getters y Setters
@@ -38,13 +40,25 @@ public class Taco {
         this.precio = precio;
     }
 
-    // Método opcional: para mostrar el taco en consola o debug
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public double getTotal() {
+        return precio * cantidad;
+    }
+
     @Override
     public String toString() {
         return "Taco{" +
                 "nombre='" + nombre + '\'' +
                 ", tamaño='" + tamaño + '\'' +
                 ", precio=" + precio +
+                ", cantidad=" + cantidad +
                 '}';
     }
 }

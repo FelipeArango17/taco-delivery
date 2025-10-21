@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedido Exitoso</title>
+    <link rel="stylesheet" th:href="@{/carrito.css}">
+</head>
+<body>
+<header>
+    <h1>✅ Pedido Confirmado</h1>
+    <a href="/menu" class="btn-volver">⬅ Volver al menú</a>
+</header>
+
+<div class="carrito-container">
+    <p th:text="${mensaje}"></p>
+</div>
+</body>
+</html>

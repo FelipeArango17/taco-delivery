@@ -11,6 +11,13 @@
     <a href="/menu/carrito" class="btn-ver-carrito">🛒 Ver carrito</a>
 </header>
 
+<div th:if="${aviso}" class="aviso-login" style="margin: 15px 0;">
+    <p th:text="${aviso}" style="color:red; font-weight:bold;"></p>
+    <a href="/login" class="btn-login" style="display:inline-block; padding: 8px 12px; background-color:#007bff; color:white; text-decoration:none; border-radius:5px; margin-top:5px;">
+        Ir a Login
+    </a>
+</div>
+
 <div class="menu-container">
     <div class="taco-card" th:each="taco : ${tacos}">
         <img th:src="@{|/static.images/tacos-${#strings.replace(#strings.replace(#strings.replace(taco.nombre.toLowerCase(), 'tacos de ', ''), 'tacos al ', ''), ' ', '-')}.png|}"
