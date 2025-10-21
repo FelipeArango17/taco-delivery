@@ -55,10 +55,10 @@ public class UserController {
 
         if (user != null) {
             session.setAttribute("usuario", user);
-            return "redirect:/menu";
+            return "redirect:/index";
         } else {
             model.addAttribute("error", "Usuario o contraseña incorrectos");
-            model.addAttribute("user", new User("", "", "", "", "")); // ✅ necesario para evitar error de Thymeleaf
+            model.addAttribute("user", new User("", "", "", "", "")); // necesario para evitar error de Thymeleaf
             return "login";
         }
     }
