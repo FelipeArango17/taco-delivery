@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tu Carrito</title>
+    <link rel="stylesheet" th:href="@{/carrito.css}">
+</head>
+<body>
+<header>
+    <h1>🛒 Tu Carrito</h1>
+    <a href="/menu" class="btn-volver">⬅ Volver al menú</a>
+</header>
+
+<div class="carrito-container" th:if="${#lists.isEmpty(carrito)}">
+    <p>El carrito está vacío.</p>
+</div>
+
+<div class="carrito-container" th:if="${!#lists.isEmpty(carrito)}">
+    <div class="taco-item" th:each="taco, iterStat : ${carrito}">
+        <img th:src="@{'/images/' + ${#strings.replace(taco.nombre, ' ', '_').toLowerCase()} + '.jpg'}"
+             alt="Taco" class="taco-img">
+
+        <div class="taco-info">
+            <h2 th:text="${taco.nombre}"></h2>
+
+            <form th:action="@{/menu/actualizar}" method="post">
+                <input type="hidden" name="index" th:value="${iterStat.index}">
+                <label>Tamaño:</label>
+                <select name="tamaño" onchange="this.form.submit()">
+                    <option th:each="t : ${tacosDisponibles}"
+                            th:if="${t.nombre == taco.nombre}"
+                            th:value="${t.tamaño}"
+                            th:text="${t.tamaño}"
+                            th:selected="${t.tamaño == taco.tamaño}">
+                    </option>
+                </select>
+            </form>
+
+            <p class="precio" th:text="${taco.precio} + ' COP'"></p>
+        </div>
+    </div>
+
+    <div class="resumen">
+        <h3>Total: <span th:text="${total} + ' COP'"></span></h3>
+        <form th:action="@{/menu/vaciar}" method="post">
+            <button type="submit" class="btn-vaciar">Vaciar carrito</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

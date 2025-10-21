@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Menú de Tacos</title>
+    <link rel="stylesheet" th:href="@{/menu.css}">
+</head>
+<body>
+<header>
+    <h1>🌮 Nuestro Menú</h1>
+    <a href="/menu/carrito" class="btn-ver-carrito">🛒 Ver carrito</a>
+</header>
+
+<div class="menu-container">
+    <div class="taco-card" th:each="taco : ${tacos}">
+        <img th:src="@{'/images/' + ${#strings.replace(taco.nombre, ' ', '_').toLowerCase()} + '.jpg'}"
+             alt="Taco" class="taco-img">
+
+        <h2 th:text="${taco.nombre}"></h2>
+        <p>Selecciona el tamaño después en el carrito</p>
+
+        <form th:action="@{/menu/agregar}" method="post">
+            <input type="hidden" name="nombre" th:value="${taco.nombre}">
+            <button type="submit">Agregar al carrito</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

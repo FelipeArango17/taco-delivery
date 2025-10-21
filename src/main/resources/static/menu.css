@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+header {
+    background-color: #512da8;
+    color: white;
+    padding: 20px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+.btn-ver-carrito {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    background: #6a4fcf;
+    padding: 8px 15px;
+    border-radius: 8px;
+    margin-left: 20px;
+}
+
+.menu-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    padding: 30px;
+}
+
+.taco-card {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    transition: transform 0.2s;
+}
+
+.taco-card:hover {
+    transform: translateY(-5px);
+}
+
+.taco-img {
