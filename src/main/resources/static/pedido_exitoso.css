@@ -1,6 +1,7 @@
 body {
     font-family: "Poppins", sans-serif;
-    background: linear-gradient(to right, #c3cfe2, #e2e2e2);
+    background: linear-gradient(to right, #ffb703, #f8b400);
+    color: #333;
     margin: 0;
     padding: 0;
     text-align: center;
