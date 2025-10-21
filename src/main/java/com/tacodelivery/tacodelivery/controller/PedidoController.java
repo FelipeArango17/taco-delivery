@@ -131,10 +131,22 @@ public class PedidoController {
                                   @ModelAttribute("carrito") List<Taco> carrito,
                                   Model model) {
 
-        // Aquí podrías guardar el pedido en BD
-        carrito.clear();
+        // Calcular el total
+        double total = carrito.stream()
+                .mapToDouble(taco -> taco.getPrecio() * taco.getCantidad())
+                .sum();
 
+        // Clonar los productos antes de limpiar el carrito
+        List<Taco> productosPedido = new ArrayList<>(carrito);
+
+        // Pasar datos a la vista
         model.addAttribute("mensaje", "¡Pedido confirmado! Se entregará en: " + direccion + ". Pago contra entrega.");
+        model.addAttribute("productos", productosPedido);
+        model.addAttribute("total", total);
+
+        carrito.clear(); // se limpia después
+
         return "pedido_exitoso";
     }
+
 }

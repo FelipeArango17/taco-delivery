@@ -1,0 +1,71 @@
+body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(to right, #c3cfe2, #e2e2e2);
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+header {
+    background-color: #5a2ea6;
+    color: white;
+    padding: 20px 0;
+    margin-bottom: 30px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.btn-volver {
+    display: inline-block;
+    margin-top: 10px;
+    background-color: #7a44f2;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-volver:hover {
+    background-color: #6430c9;
+}
+
+.carrito-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.pedido-detalles {
+    margin-top: 25px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #eee;
+    font-weight: bold;
+}
+
+.total-pagar {
+    margin-top: 20px;
+    text-align: right;
+    font-size: 1.2rem;
+    font-weight: bold;
+}

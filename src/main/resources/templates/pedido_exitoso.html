@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Pedido Exitoso</title>
-    <link rel="stylesheet" th:href="@{/carrito.css}">
+    <link rel="stylesheet" th:href="@{/pedido_exitoso.css}">
 </head>
 <body>
 <header>
@@ -13,6 +13,32 @@
 
 <div class="carrito-container">
     <p th:text="${mensaje}"></p>
+
+    <div class="pedido-detalles">
+        <h2>Detalles del pedido</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Subtotal</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="taco : ${productos}">
+                <td th:text="${taco.nombre}"></td>
+                <td th:text="${taco.cantidad}"></td>
+                <td th:text="${taco.precio} + ' $'"></td>
+                <td th:text="${taco.precio * taco.cantidad} + ' $'"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="total-pagar">
+            <h3>Total a pagar: <span th:text="${total} + ' $'"></span></h3>
+        </div>
+    </div>
 </div>
 </body>
 </html>
