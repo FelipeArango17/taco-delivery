@@ -16,14 +16,14 @@ public class UserController {
         this.userService = userService;
     }
 
-    // 🔹 Mostrar formulario de registro
+    // Mostrar formulario de registro
     @GetMapping("/registro")
     public String mostrarFormularioRegistro(Model model) {
         model.addAttribute("user", new User("", "", "", "", ""));
         return "registro";
     }
 
-    // 🔹 Procesar registro
+    // Procesar registro
     @PostMapping("/registro")
     public String registrarUsuario(@ModelAttribute User user, Model model) {
         boolean registrado = userService.registrarUsuario(user);
@@ -37,14 +37,14 @@ public class UserController {
         }
     }
 
-    // 🔹 Mostrar login
+    // Mostrar login
     @GetMapping("/login")
     public String mostrarLogin(Model model) {
         model.addAttribute("user", new User("", "", "", "", ""));
         return "login";
     }
 
-    // 🔹 Procesar login
+    // Procesar login
     @PostMapping("/login")
     public String validarLogin(@RequestParam String email,
                                @RequestParam String password,
@@ -63,7 +63,7 @@ public class UserController {
         }
     }
 
-    // 🔹 Logout
+    // Logout
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
