@@ -62,13 +62,11 @@ footer {
     color: #ccc;
 }
 
-/* Evita que bloquee el scroll */
 html, body {
     height: auto;
     overflow-y: auto;
 }
 
-/* Asegura que el footer se mantenga abajo */
 body {
     display: flex;
     flex-direction: column;

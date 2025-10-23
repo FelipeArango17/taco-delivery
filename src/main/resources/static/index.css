@@ -7,14 +7,12 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-/* --- FONDO GENERAL --- */
 body {
     background: linear-gradient(to right, #ffb703, #f8b400);
     color: #333;
     overflow-x: hidden;
 }
 
-/* --- HEADER --- */
 header {
     width: 100%;
     padding: 20px 80px;
@@ -62,7 +60,6 @@ header nav a:hover {
     color: #fff;
 }
 
-/* --- PERFIL ICONO --- */
 .perfil {
     display: flex;
     align-items: center;
@@ -86,7 +83,6 @@ header nav a:hover {
     box-shadow: 0 0 15px rgba(81, 45, 168, 0.4);
 }
 
-/* --- HERO SECTION --- */
 .hero {
     display: flex;
     align-items: center;
@@ -96,21 +92,19 @@ header nav a:hover {
     border-top: 2px solid rgba(255, 255, 255, 0.3);
 }
 
-/* --- Imagen natural --- */
 .hero-image img {
     width: 580px;
     height: auto;
     border-radius: 0;
     box-shadow: none;
-    transform: translate(-90px, 70px); /* más a la izquierda y más abajo */
-    transition: none; /* sin movimiento */
+    transform: translate(-90px, 70px);
+    transition: none;
 }
 
-/* --- Texto --- */
 .hero-text {
     max-width: 600px;
     color: #fff;
-    margin-left: -60px; /* mueve el texto un poco hacia la izquierda */
+    margin-left: -60px;
 }
 
 .hero-text h2 {
@@ -135,7 +129,6 @@ header nav a:hover {
     color: #222;
 }
 
-/* --- BOTÓN --- */
 .btn-menu {
     background-color: #512da8;
     color: #fff;

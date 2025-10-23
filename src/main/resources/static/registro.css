@@ -17,7 +17,6 @@ body {
     height: 100vh;
 }
 
-/* ---------- CONTENEDOR PRINCIPAL ---------- */
 .container {
     background-color: #fff;
     border-radius: 30px;
@@ -47,7 +46,6 @@ body {
     margin: 15px 0 10px;
 }
 
-/* ---------- BOTONES ---------- */
 .container button {
     background-color: #512da8;
     color: #fff;
@@ -68,7 +66,6 @@ body {
     border-color: #fff;
 }
 
-/* ---------- FORMULARIOS ---------- */
 .container form {
     background-color: #fff;
     display: flex;
@@ -90,7 +87,6 @@ body {
     outline: none;
 }
 
-/* ---------- PANEL DE FORMULARIOS ---------- */
 .form-container {
     position: absolute;
     top: 0;
@@ -133,7 +129,6 @@ body {
     }
 }
 
-/* ---------- ICONOS SOCIALES ---------- */
 .social-icons {
     margin: 20px 0;
 }
@@ -149,7 +144,6 @@ body {
     height: 40px;
 }
 
-/* ---------- PANEL DE TRANSICIÓN ---------- */
 .toggle-container {
     position: absolute;
     top: 0;
@@ -182,7 +176,6 @@ body {
     transform: translateX(50%);
 }
 
-/* ---------- PANELES DE TEXTO ---------- */
 .toggle-panel {
     position: absolute;
     width: 50%;
@@ -215,7 +208,6 @@ body {
     transform: translateX(200%);
 }
 
-/* ---------- LOGO ---------- */
 .logo-container {
     width: 200px;
     height: 200px;
@@ -235,7 +227,6 @@ body {
     object-fit: cover;
 }
 
-/* ---------- BOTÓN DE REGISTRO ---------- */
 a#register {
     display: inline-block;
     background-color: transparent;

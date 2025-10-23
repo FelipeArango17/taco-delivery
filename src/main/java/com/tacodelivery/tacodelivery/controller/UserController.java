@@ -32,7 +32,7 @@ public class UserController {
             return "redirect:/login";
         } else {
             model.addAttribute("error", "Ya existe un usuario con ese email");
-            model.addAttribute("user", new User("", "", "", "", "")); // ✅ evita error en el form
+            model.addAttribute("user", new User("", "", "", "", "")); // evita error en el form
             return "registro";
         }
     }
@@ -61,12 +61,5 @@ public class UserController {
             model.addAttribute("user", new User("", "", "", "", "")); // necesario para evitar error de Thymeleaf
             return "login";
         }
-    }
-
-    // Logout
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect:/login";
     }
 }
