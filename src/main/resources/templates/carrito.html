@@ -59,7 +59,7 @@
     </div>
 
     <div class="resumen">
-        <h3>Total: <span th:text="${total} + ' COP'"></span></h3>
+        <h3>Total: <span th:text="${total} + 'COP' "></span></h3>
 
         <form th:action="@{/menu/vaciar}" method="post" style="display:inline-block;">
             <button type="submit" class="btn-vaciar">Vaciar carrito</button>
