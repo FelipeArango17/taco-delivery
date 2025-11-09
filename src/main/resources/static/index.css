@@ -45,27 +45,13 @@ header nav a:hover {
     color: #ff7b00;
 }
 
-.btn-reservar {
-    background-color: #512da8;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: 0.3s;
-}
-
-.btn-reservar:hover {
-    background-color: #ff7b00;
-    color: #fff;
-}
-
 .perfil {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 80px;
     height: 80px;
+    cursor: pointer;
 }
 
 .perfil img {
@@ -83,6 +69,67 @@ header nav a:hover {
     box-shadow: 0 0 15px rgba(81, 45, 168, 0.4);
 }
 
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    max-width: 350px;
+    width: 90%;
+}
+
+.modal-content h3 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.modal-buttons button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+#cancelBtn {
+    background: #ccc;
+    color: #333;
+}
+
+#cancelBtn:hover {
+    background: #bbb;
+}
+
+#logoutBtn {
+    background: #d32f2f;
+    color: white;
+}
+
+#logoutBtn:hover {
+    background: #b71c1c;
+}
+
 .hero {
     display: flex;
     align-items: center;
@@ -95,10 +142,7 @@ header nav a:hover {
 .hero-image img {
     width: 580px;
     height: auto;
-    border-radius: 0;
-    box-shadow: none;
     transform: translate(-90px, 70px);
-    transition: none;
 }
 
 .hero-text {
@@ -138,5 +182,10 @@ header nav a:hover {
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    transition:
+    transition: background 0.3s;
+}
+
+.btn-menu:hover {
+    background-color: #ff7b00;
+    color: #fff;
 }

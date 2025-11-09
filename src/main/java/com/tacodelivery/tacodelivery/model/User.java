@@ -1,11 +1,22 @@
 package com.tacodelivery.tacodelivery.model;
 
+import jakarta.persistence.*; // Importante para las anotaciones JPA
+
+@Entity                     // Marca la clase como entidad (tabla en la base)
+@Table(name = "users")      // Puedes cambiar el nombre de la tabla si prefieres
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // ID autoincremental
+    private Long id;
+
     private String nombre;
     private String email;
     private String password;
     private String address;
     private String telefono;
+
+    public User() {} // Constructor vacío requerido por JPA
 
     public User(String nombre, String email, String password, String address, String telefono) {
         this.nombre = nombre;
@@ -16,6 +27,9 @@ public class User {
     }
 
     // Getters y setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
 

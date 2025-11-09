@@ -7,8 +7,17 @@
 </head>
 <body>
 <header>
-    <h1>Nuestro Menú</h1>
-    <a href="/menu/carrito" class="btn-ver-carrito">🛒 Ver carrito</a>
+    <div class="header-content">
+        <h1>Nuestro Menú</h1>
+
+        <div class="header-buttons">
+            <div class="perfil" id="perfilBtn">
+                <img src="/static.images/user-iconv2.png" alt="Usuario">
+            </div>
+
+            <a href="/menu/carrito" class="btn-ver-carrito">🛒 Ver carrito</a>
+        </div>
+    </div>
 </header>
 
 <div th:if="${aviso}" class="aviso-login" style="margin: 15px 0;">
@@ -39,9 +48,45 @@
 
         <form th:action="@{/menu/agregar}" method="post">
             <input type="hidden" name="nombre" th:value="${taco.nombre}">
-            <button type="submit">Agregar al carrito</button>
+            <button type="submit" class="btn-agregar">Agregar al carrito</button>
         </form>
     </div>
 </div>
+
+<div id="logoutModal" class="modal">
+    <div class="modal-content">
+        <h3>¿Deseas cerrar sesión?</h3>
+        <div class="modal-buttons">
+            <button id="cancelBtn">Cancelar</button>
+            <button id="logoutBtn">Cerrar sesión</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const perfilBtn = document.getElementById('perfilBtn');
+    const logoutModal = document.getElementById('logoutModal');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    perfilBtn.addEventListener('click', () => {
+        logoutModal.style.display = 'flex';
+    });
+
+    cancelBtn.addEventListener('click', () => {
+        logoutModal.style.display = 'none';
+    });
+
+    logoutBtn.addEventListener('click', () => {
+        window.location.href = '/logout';
+    });
+
+    // Cierra modal si se hace clic fuera del cuadro
+    window.addEventListener('click', (e) => {
+        if (e.target === logoutModal) {
+            logoutModal.style.display = 'none';
+        }
+    });
+</script>
 </body>
 </html>
