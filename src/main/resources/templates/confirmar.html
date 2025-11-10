@@ -38,7 +38,7 @@
                     <input type="number" th:id="'cantidad-' + ${iterStat.index}" name="cantidad" min="1"
                            th:value="${taco.cantidad}" onchange="this.form.submit()" class="input-cantidad">
                 </div>
-                <p class="precio" th:text="${taco.total} + ' COP'"></p>
+                <p class="precio" th:text="${#numbers.formatDecimal(taco.total, 0, 0)} + ' COP'"></p>
             </form>
         </div>
 
@@ -49,7 +49,8 @@
     </div>
 
     <div class="resumen">
-        <h3>Total: <span th:text="${total} + ' COP'"></span></h3>
+        <!-- Aquí estaba el problema: ahora se formatea sin decimales -->
+        <h3>Total: <span th:text="${#numbers.formatDecimal(total, 0, 0)} + ' COP'"></span></h3>
 
         <form th:action="@{/menu/vaciar}" method="post" style="display:inline-block;">
             <button type="submit" class="btn-vaciar">Vaciar carrito</button>

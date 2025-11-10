@@ -36,7 +36,7 @@
         </table>
 
         <div class="total-pagar">
-            <h3>Total a pagar: <span th:text="${total} + ' $'"></span></h3>
+            <h3>Total: <span th:text="${#numbers.formatDecimal(total, 0, 0)} + ' COP'"></span></h3>
         </div>
     </div>
 </div>

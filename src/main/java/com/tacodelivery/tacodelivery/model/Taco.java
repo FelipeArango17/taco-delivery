@@ -4,11 +4,11 @@ public class Taco {
 
     private String nombre;
     private String tamaño;
-    private double precio;
+    private int precio;
     private int cantidad;
 
     // Constructor
-    public Taco(String nombre, String tamaño, double precio) {
+    public Taco(String nombre, String tamaño, int precio) {
         this.nombre = nombre;
         this.tamaño = tamaño;
         this.precio = precio;
@@ -32,11 +32,11 @@ public class Taco {
         this.tamaño = tamaño;
     }
 
-    public double getPrecio() {
+    public int getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(int precio) {
         this.precio = precio;
     }
 
@@ -48,7 +48,7 @@ public class Taco {
         this.cantidad = cantidad;
     }
 
-    public double getTotal() {
+    public int getTotal() {
         return precio * cantidad;
     }
 
