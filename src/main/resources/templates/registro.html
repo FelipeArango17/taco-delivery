@@ -5,8 +5,39 @@
     <title>Registro</title>
     <link rel="stylesheet" href="/registro.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+
+<div th:if="${error}">
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: /*[[${error}]]*/ 'Error desconocido',
+            confirmButtonColor: '#8B0000'
+        });
+        /*]]>*/
+    </script>
+</div>
+
+<div th:if="${mensaje}">
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        Swal.fire({
+            icon: 'success',
+            title: 'Registro exitoso',
+            text: /*[[${mensaje}]]*/ 'Usuario creado con éxito',
+            confirmButtonColor: '#28a745'
+        }).then(() => {
+            window.location.href = '/login';
+        });
+        /*]]>*/
+    </script>
+</div>
+
 <div class="container active" id="container">
 
     <!-- FORMULARIO DE REGISTRO -->
@@ -15,7 +46,7 @@
             <h1>Crear Cuenta</h1>
             <input type="text" th:field="*{nombre}" placeholder="Nombre" required>
             <input type="email" th:field="*{email}" placeholder="Email" required>
-            <input type="text" th:field="*{address}" placeholder="Direccion" required>
+            <input type="text" th:field="*{address}" placeholder="Dirección" required>
             <input type="tel" th:field="*{telefono}" placeholder="Teléfono" pattern="[0-9+ ]*" required>
             <input type="password" th:field="*{password}" placeholder="Contraseña" required>
             <button type="submit">Registrarse</button>
@@ -32,11 +63,9 @@
                 <h1>¡Bienvenido a Tacos Delivery!</h1>
                 <p>Regístrate con tus datos personales para comenzar</p>
             </div>
-
         </div>
     </div>
 </div>
 
-<script th:src="@{/js/login_registro.js}"></script>
 </body>
 </html>

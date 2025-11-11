@@ -20,6 +20,7 @@
     </div>
 </header>
 
+<!-- Aviso si el usuario intenta agregar sin loguearse -->
 <div th:if="${aviso}" class="aviso-login" style="margin: 15px 0;">
     <p th:text="${aviso}" style="color:red; font-weight:bold;"></p>
     <a href="/login" class="btn-login" style="display:inline-block; padding: 8px 12px; background-color:#007bff; color:white; text-decoration:none; border-radius:5px; margin-top:5px;">
@@ -53,12 +54,25 @@
     </div>
 </div>
 
+<!-- MODAL dinámico según si hay sesión o no -->
 <div id="logoutModal" class="modal">
     <div class="modal-content">
-        <h3>¿Deseas cerrar sesión?</h3>
-        <div class="modal-buttons">
-            <button id="cancelBtn">Cancelar</button>
-            <button id="logoutBtn">Cerrar sesión</button>
+        <!-- Si el usuario está logueado -->
+        <div th:if="${session.usuario != null}">
+            <h3>¿Deseas cerrar sesión?</h3>
+            <div class="modal-buttons">
+                <button id="cancelBtn">Cancelar</button>
+                <button id="logoutBtn">Cerrar sesión</button>
+            </div>
+        </div>
+
+        <!-- Si NO está logueado -->
+        <div th:if="${session.usuario == null}">
+            <h3>No has iniciado sesión</h3>
+            <div class="modal-buttons">
+                <button id="cancelBtn">Cancelar</button>
+                <button id="loginBtn">Ir al login</button>
+            </div>
         </div>
     </div>
 </div>
@@ -66,22 +80,33 @@
 <script>
     const perfilBtn = document.getElementById('perfilBtn');
     const logoutModal = document.getElementById('logoutModal');
-    const cancelBtn = document.getElementById('cancelBtn');
+    const cancelBtns = document.querySelectorAll('#cancelBtn');
     const logoutBtn = document.getElementById('logoutBtn');
+    const loginBtn = document.getElementById('loginBtn');
 
     perfilBtn.addEventListener('click', () => {
         logoutModal.style.display = 'flex';
     });
 
-    cancelBtn.addEventListener('click', () => {
-        logoutModal.style.display = 'none';
+    cancelBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            logoutModal.style.display = 'none';
+        });
     });
 
-    logoutBtn.addEventListener('click', () => {
-        window.location.href = '/logout';
-    });
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            window.location.href = '/logout';
+        });
+    }
 
-    // Cierra modal si se hace clic fuera del cuadro
+    if (loginBtn) {
+        loginBtn.addEventListener('click', () => {
+            window.location.href = '/login';
+        });
+    }
+
+    // Cerrar modal al hacer clic fuera del cuadro
     window.addEventListener('click', (e) => {
         if (e.target === logoutModal) {
             logoutModal.style.display = 'none';

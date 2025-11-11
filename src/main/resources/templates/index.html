@@ -17,9 +17,10 @@
         <a href="/index">Inicio</a>
         <a href="#nosotros">Nosotros</a>
         <a href="/menu">Menú</a>
+        <a href="/carrito">Carrito</a>
     </nav>
 
-    <!-- 🔹 Icono perfil con ID para el modal -->
+    <!-- Mostrar icono solo si hay sesión -->
     <div class="perfil" id="perfilBtn">
         <img src="/static.images/user-iconv2.png" alt="Usuario">
     </div>
@@ -37,13 +38,25 @@
     </div>
 </section>
 
-<!-- 🔹 Modal de cierre de sesión -->
+<!-- Modal que cambia según si el usuario ha iniciado sesión -->
 <div id="logoutModal" class="modal">
     <div class="modal-content">
-        <h3>¿Deseas cerrar sesión?</h3>
-        <div class="modal-buttons">
-            <button id="cancelBtn">Cancelar</button>
-            <button id="logoutBtn">Cerrar sesión</button>
+        <!-- Mostrar botón de CERRAR SESIÓN si está logueado -->
+        <div th:if="${session.usuario != null}">
+            <h3>¿Deseas cerrar sesión?</h3>
+            <div class="modal-buttons">
+                <button id="cancelBtn">Cancelar</button>
+                <button id="logoutBtn">Cerrar sesión</button>
+            </div>
+        </div>
+
+        <!-- Mostrar botón de IR AL LOGIN si NO está logueado -->
+        <div th:if="${session.usuario == null}">
+            <h3>No has iniciado sesión</h3>
+            <div class="modal-buttons">
+                <button id="cancelBtn">Cancelar</button>
+                <button id="loginBtn">Ir al login</button>
+            </div>
         </div>
     </div>
 </div>
@@ -53,20 +66,31 @@
 <script>
     const perfilBtn = document.getElementById('perfilBtn');
     const logoutModal = document.getElementById('logoutModal');
-    const cancelBtn = document.getElementById('cancelBtn');
+    const cancelBtn = document.querySelectorAll('#cancelBtn');
     const logoutBtn = document.getElementById('logoutBtn');
+    const loginBtn = document.getElementById('loginBtn');
 
     perfilBtn.addEventListener('click', () => {
         logoutModal.style.display = 'flex';
     });
 
-    cancelBtn.addEventListener('click', () => {
-        logoutModal.style.display = 'none';
+    cancelBtn.forEach(btn => {
+        btn.addEventListener('click', () => {
+            logoutModal.style.display = 'none';
+        });
     });
 
-    logoutBtn.addEventListener('click', () => {
-        window.location.href = '/logout';
-    });
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            window.location.href = '/logout';
+        });
+    }
+
+    if (loginBtn) {
+        loginBtn.addEventListener('click', () => {
+            window.location.href = '/login';
+        });
+    }
 
     window.addEventListener('click', (e) => {
         if (e.target === logoutModal) {
