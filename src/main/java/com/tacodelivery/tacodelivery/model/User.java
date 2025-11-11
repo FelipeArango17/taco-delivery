@@ -8,7 +8,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID autoincremental
-    private Long id;
+    private Long user_id;
 
     private String nombre;
     private String email;
@@ -27,8 +27,8 @@ public class User {
     }
 
     // Getters y setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() { return user_id; }
+    public void setId(Long id) { this.user_id = user_id; }
 
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
