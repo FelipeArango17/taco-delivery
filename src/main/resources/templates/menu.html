@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <title>Menú de Tacos</title>
     <link rel="stylesheet" th:href="@{/menu.css}">
+    <link rel="stylesheet" th:href="@{/footer.css}">
 </head>
 <body>
+
 <header>
     <div class="header-content">
         <h1>Nuestro Menú</h1>
@@ -54,6 +56,35 @@
     </div>
 </div>
 
+<!-- FOOTER -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>TacoDelivery</h3>
+            <p>Los mejores tacos a un clic de distancia.</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Contacto</h3>
+            <p><i class="fa fa-envelope"></i> contacto@tacodelivery.com</p>
+            <p><i class="fa fa-phone"></i> +57 300 123 4567</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Síguenos</h3>
+            <div class="social-icons">
+                <a href="#"><i class="fa fa-facebook-f"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        © 2025 TacoDelivery - Todos los derechos reservados
+    </div>
+</footer>
+
 <!-- MODAL dinámico según si hay sesión o no -->
 <div id="logoutModal" class="modal">
     <div class="modal-content">
@@ -80,7 +111,7 @@
 <script>
     const perfilBtn = document.getElementById('perfilBtn');
     const logoutModal = document.getElementById('logoutModal');
-    const cancelBtns = document.querySelectorAll('#cancelBtn');
+    const cancelBtns = document.querySelectorAll('#cancelBtn, #cancelBtns');
     const logoutBtn = document.getElementById('logoutBtn');
     const loginBtn = document.getElementById('loginBtn');
 
@@ -113,5 +144,6 @@
         }
     });
 </script>
+
 </body>
 </html>

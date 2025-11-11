@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Tu Carrito</title>
     <link rel="stylesheet" th:href="@{/carrito.css}">
+    <link rel="stylesheet" th:href="@{/footer.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
@@ -12,64 +13,60 @@
     <a href="/menu" class="btn-volver">⬅ Volver al menú</a>
 </header>
 
-<div class="carrito-container" th:if="${#lists.isEmpty(carrito)}">
-    <p>El carrito está vacío.</p>
-</div>
+<main>
+    <div class="carrito-container" th:if="${#lists.isEmpty(carrito)}">
+        <p>El carrito está vacío.</p>
+    </div>
 
-<div class="carrito-container" th:if="${!#lists.isEmpty(carrito)}">
-    <div class="taco-item" th:each="taco, iterStat : ${carrito}">
-        <!-- Imagen del taco -->
-        <img th:src="@{|/static.images/tacos-${#strings.replace(#strings.replace(#strings.replace(taco.nombre.toLowerCase(), 'tacos de ', ''), 'tacos al ', ''), ' ', '-')}.png|}"
-             th:alt="'Taco ' + ${taco.nombre}" class="taco-img">
+    <div class="carrito-container" th:if="${!#lists.isEmpty(carrito)}">
+        <div class="taco-item" th:each="taco, iterStat : ${carrito}">
+            <img th:src="@{|/static.images/tacos-${#strings.replace(#strings.replace(#strings.replace(taco.nombre.toLowerCase(), 'tacos de ', ''), 'tacos al ', ''), ' ', '-')}.png|}"
+                 th:alt="'Taco ' + ${taco.nombre}" class="taco-img">
 
-        <div class="taco-info">
-            <h2 th:text="${taco.nombre}"></h2>
+            <div class="taco-info">
+                <h2 th:text="${taco.nombre}"></h2>
+                <form th:action="@{/menu/actualizar}" method="post" class="opciones-form">
+                    <input type="hidden" name="index" th:value="${iterStat.index}">
+                    <div class="opciones">
+                        <label th:for="'tamaño-' + ${iterStat.index}">Tamaño:</label>
+                        <select th:id="'tamaño-' + ${iterStat.index}" name="tamaño" onchange="this.form.submit()">
+                            <option th:each="t : ${tacosDisponibles}"
+                                    th:if="${t.nombre == taco.nombre}"
+                                    th:value="${t.tamaño}"
+                                    th:text="${t.tamaño}"
+                                    th:selected="${t.tamaño == taco.tamaño}"></option>
+                        </select>
 
-            <!-- Formulario para actualizar tamaño y cantidad -->
-            <form th:action="@{/menu/actualizar}" method="post" class="opciones-form">
+                        <label th:for="'cantidad-' + ${iterStat.index}">Cantidad:</label>
+                        <input type="number" th:id="'cantidad-' + ${iterStat.index}" name="cantidad" min="1"
+                               th:value="${taco.cantidad}" onchange="this.form.submit()" class="input-cantidad">
+                    </div>
+                    <p class="precio" th:text="${#numbers.formatDecimal(taco.total, 0, 0)} + ' COP'"></p>
+                </form>
+            </div>
+
+            <form th:action="@{/menu/eliminar}" method="post" style="margin-left: auto;">
                 <input type="hidden" name="index" th:value="${iterStat.index}">
-
-                <div class="opciones">
-                    <label th:for="'tamaño-' + ${iterStat.index}">Tamaño:</label>
-                    <select th:id="'tamaño-' + ${iterStat.index}" name="tamaño" onchange="this.form.submit()">
-                        <option th:each="t : ${tacosDisponibles}"
-                                th:if="${t.nombre == taco.nombre}"
-                                th:value="${t.tamaño}"
-                                th:text="${t.tamaño}"
-                                th:selected="${t.tamaño == taco.tamaño}">
-                        </option>
-                    </select>
-
-                    <label th:for="'cantidad-' + ${iterStat.index}">Cantidad:</label>
-                    <input type="number" th:id="'cantidad-' + ${iterStat.index}" name="cantidad" min="1"
-                           th:value="${taco.cantidad}" onchange="this.form.submit()" class="input-cantidad">
-                </div>
-
-                <!-- Precio individual sin decimales -->
-                <p class="precio" th:text="${#numbers.formatDecimal(taco.total, 0, 0)} + ' COP'"></p>
+                <button type="submit" class="btn-eliminar" title="Eliminar taco">
+                    <i class="fa fa-trash"></i>
+                </button>
             </form>
         </div>
 
-        <!-- Botón eliminar -->
-        <form th:action="@{/menu/eliminar}" method="post" style="margin-left: auto;">
-            <input type="hidden" name="index" th:value="${iterStat.index}">
-            <button type="submit" class="btn-eliminar" title="Eliminar taco">
-                <i class="fa fa-trash"></i>
-            </button>
-        </form>
+        <div class="resumen">
+            <h3>Total: <span th:text="${#numbers.formatDecimal(total, 0, 0)} + ' COP'"></span></h3>
+
+            <form th:action="@{/menu/vaciar}" method="post" style="display:inline-block;">
+                <button type="submit" class="btn-vaciar">Vaciar carrito</button>
+            </form>
+
+            <form th:action="@{/menu/confirmar}" method="get" style="display:inline-block; margin-left: 10px;">
+                <button type="submit" class="btn-confirmar">Confirmar pedido</button>
+            </form>
+        </div>
     </div>
+</main>
 
-    <div class="resumen">
-        <h3>Total: <span th:text="${#numbers.formatDecimal(total, 0, 0)} + ' COP'"></span></h3>
-
-        <form th:action="@{/menu/vaciar}" method="post" style="display:inline-block;">
-            <button type="submit" class="btn-vaciar">Vaciar carrito</button>
-        </form>
-
-        <form th:action="@{/menu/confirmar}" method="get" style="display:inline-block; margin-left: 10px;">
-            <button type="submit" class="btn-confirmar">Confirmar pedido</button>
-        </form>
-    </div>
-</div>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>
