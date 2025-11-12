@@ -14,11 +14,14 @@
 </header>
 
 <main>
+    <!-- Si el carrito está vacío -->
     <div class="carrito-container" th:if="${#lists.isEmpty(carrito)}">
         <p>El carrito está vacío.</p>
     </div>
 
+    <!-- Si el carrito tiene productos -->
     <div class="carrito-container" th:if="${!#lists.isEmpty(carrito)}">
+        <!-- Lista de tacos -->
         <div class="taco-item" th:each="item : ${carrito}">
             <img th:src="@{|/static.images/tacos-${#strings.replace(#strings.replace(#strings.replace(item.taco.nombre.toLowerCase(), 'tacos de ', ''), 'tacos al ', ''), ' ', '-')}.png|}"
                  th:alt="'Taco ' + ${item.taco.nombre}" class="taco-img">
@@ -28,6 +31,7 @@
             </div>
         </div>
 
+        <!-- Resumen del pedido -->
         <div class="resumen">
             <h3>Total: <span th:text="${#numbers.formatDecimal(total, 0, 0)} + ' COP'"></span></h3>
 
@@ -35,12 +39,12 @@
                 <button type="submit" class="btn-vaciar">Vaciar carrito</button>
             </form>
 
-            <form th:action="@{/menu/finalizar}" method="post" style="display:block; margin-top: 15px;">
+            <form th:action="@{/pago/seleccionar}" method="get" style="display:block; margin-top: 15px;">
                 <label for="direccion">Dirección de entrega:</label>
                 <textarea id="direccion" name="direccion" rows="3" required th:text="${direccion}"></textarea>
 
-                <p>Pago: <strong>Contra entrega</strong></p>
-                <button type="submit" class="btn-confirmar">Confirmar Pedido</button>
+                <input type="hidden" name="total" th:value="${total}">
+                <button type="submit" class="btn-confirmar">Ir al pago</button>
             </form>
         </div>
     </div>

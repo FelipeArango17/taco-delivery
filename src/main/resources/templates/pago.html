@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Seleccionar Método de Pago</title>
+    <link rel="stylesheet" th:href="@{/carrito.css}">
+    <link rel="stylesheet" th:href="@{/footer.css}">
+</head>
+<body>
+<header>
+    <h1>Seleccionar Método de Pago</h1>
+    <a href="/pedido/confirmar" class="btn-volver">⬅ Volver</a>
+</header>
+
+<main>
+    <p>Total a pagar: <strong th:text="${#numbers.formatDecimal(total, 0, 0)} + ' COP'"></strong></p>
+
+    <form th:action="@{/pago/procesar}" method="post">
+        <input type="hidden" name="total" th:value="${total}">
+        <input type="hidden" name="direccion" th:value="${direccion}">
+
+        <label><input type="radio" name="metodo" value="tarjeta_credito" required> Tarjeta de Crédito</label><br>
+        <label><input type="radio" name="metodo" value="tarjeta_debito"> Tarjeta de Débito</label><br>
+        <label><input type="radio" name="metodo" value="efectivo"> Pago contra entrega (Efectivo)</label><br><br>
+
+        <button type="submit" class="btn-confirmar">Confirmar Pago</button>
+    </form>
+</main>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

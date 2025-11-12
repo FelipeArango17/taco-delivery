@@ -100,7 +100,7 @@ public class PedidoController {
         return "redirect:/menu/carrito";
     }
 
-    // ✅ Corregido con transacción activa en el servicio
+    // Corregido con transacción activa en el servicio
     @PostMapping("/vaciar")
     public String vaciarCarrito(@SessionAttribute(name = "usuario", required = false) User usuario) {
         if (usuario != null) {
