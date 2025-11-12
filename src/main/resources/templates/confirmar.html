@@ -19,12 +19,12 @@
     </div>
 
     <div class="carrito-container" th:if="${!#lists.isEmpty(carrito)}">
-        <div class="taco-item" th:each="taco, iterStat : ${carrito}">
-            <img th:src="@{|/static.images/tacos-${#strings.replace(#strings.replace(#strings.replace(taco.nombre.toLowerCase(), 'tacos de ', ''), 'tacos al ', ''), ' ', '-')}.png|}"
-                 th:alt="'Taco ' + ${taco.nombre}" class="taco-img">
+        <div class="taco-item" th:each="item : ${carrito}">
+            <img th:src="@{|/static.images/tacos-${#strings.replace(#strings.replace(#strings.replace(item.taco.nombre.toLowerCase(), 'tacos de ', ''), 'tacos al ', ''), ' ', '-')}.png|}"
+                 th:alt="'Taco ' + ${item.taco.nombre}" class="taco-img">
             <div class="taco-info">
-                <h2 th:text="${taco.nombre}"></h2>
-                <p class="precio" th:text="${#numbers.formatDecimal(taco.total, 0, 0)} + ' COP'"></p>
+                <h2 th:text="${item.taco.nombre}"></h2>
+                <p class="precio" th:text="${#numbers.formatDecimal(item.subtotal, 0, 0)} + ' COP'"></p>
             </div>
         </div>
 

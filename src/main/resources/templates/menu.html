@@ -51,6 +51,7 @@
 
         <form th:action="@{/menu/agregar}" method="post">
             <input type="hidden" name="nombre" th:value="${taco.nombre}">
+            <input type="hidden" name="tamaño" value="Normal">
             <button type="submit" class="btn-agregar">Agregar al carrito</button>
         </form>
     </div>
@@ -137,7 +138,6 @@
         });
     }
 
-    // Cerrar modal al hacer clic fuera del cuadro
     window.addEventListener('click', (e) => {
         if (e.target === logoutModal) {
             logoutModal.style.display = 'none';

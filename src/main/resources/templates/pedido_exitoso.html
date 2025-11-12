@@ -27,11 +27,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="taco : ${productos}">
-                    <td th:text="${taco.nombre}"></td>
-                    <td th:text="${taco.cantidad}"></td>
-                    <td th:text="${taco.precio} + ' $'"></td>
-                    <td th:text="${taco.precio * taco.cantidad} + ' $'"></td>
+                <tr th:each="item : ${productos}">
+                    <td th:text="${item.taco.nombre}"></td>
+                    <td th:text="${item.cantidad}"></td>
+                    <td th:text="${item.taco.precio} + ' $'"></td>
+                    <td th:text="${item.subtotal} + ' $'"></td>
                 </tr>
                 </tbody>
             </table>
