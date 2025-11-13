@@ -93,8 +93,8 @@
         button:hover {
             background-color: #3e2284;
         }
+
         .error { color: #b00020; font-size: 0.9rem; margin-top: 6px; }
-        .input-invalid { border-color: #b00020; }
     </style>
 </head>
 <body>
@@ -105,6 +105,7 @@
 
 <div class="contenedor">
     <h2>Elige tu método de pago</h2>
+
     <form th:action="@{/pago/procesar}" method="post" id="formPago">
         <input type="hidden" name="total" th:value="${total}">
         <input type="hidden" name="metodoPago" id="metodoPago">
@@ -120,22 +121,26 @@
             <label>Tarjeta de Débito</label>
         </div>
 
-        <div class="metodo">
-            <input type="radio" name="metodoPago" value="efectivo" id="efectivo">
+        <div class="metodo" onclick="seleccionarEfectivo()">
+            <input type="radio" name="pagoRadio" id="efectivo">
             <label for="efectivo">Pago contra entrega (efectivo)</label>
+        </div>
+
+        <div th:if="${error}" class="error">
+            <p th:text="${error}"></p>
         </div>
 
         <button type="submit" class="btn-confirmar">Confirmar pago</button>
     </form>
 </div>
 
-<!-- Modal TARJETA DE CRÉDITO -->
+<!-- MODAL CRÉDITO -->
 <div class="modal" id="modalCredito">
     <div class="modal-content">
         <span class="close" onclick="cerrarModal('modalCredito')">&times;</span>
         <h3>Datos de Tarjeta de Crédito</h3>
-        <input type="text" id="numCredito" placeholder="Número de tarjeta" maxlength="16" required>
-        <input type="text" id="titularCredito" placeholder="Titular de la tarjeta" required>
+        <input type="text" id="numCredito" placeholder="Número de tarjeta" maxlength="16">
+        <input type="text" id="titularCredito" placeholder="Titular de la tarjeta">
         <label>Seleccione el número de cuotas:</label>
         <select id="selectCuotas">
             <option value="1">1 cuota</option>
@@ -148,13 +153,13 @@
     </div>
 </div>
 
-<!-- Modal TARJETA DE DÉBITO -->
+<!-- MODAL DÉBITO -->
 <div class="modal" id="modalDebito">
     <div class="modal-content">
         <span class="close" onclick="cerrarModal('modalDebito')">&times;</span>
         <h3>Datos de Tarjeta de Débito</h3>
-        <input type="text" id="numDebito" placeholder="Número de tarjeta" maxlength="16" required>
-        <input type="text" id="titularDebito" placeholder="Titular de la tarjeta" required>
+        <input type="text" id="numDebito" placeholder="Número de tarjeta" maxlength="16">
+        <input type="text" id="titularDebito" placeholder="Titular de la tarjeta">
         <br><br>
         <button onclick="aceptarDebito()">Aceptar</button>
     </div>
@@ -191,7 +196,7 @@
         titularInput.value = tit;
 
         cerrarModal("modalCredito");
-        alert("Pago con tarjeta de crédito (" + cuotas + " cuotas) listo para procesar.");
+        alert("Pago con tarjeta de crédito listo para procesar.");
     }
 
     function aceptarDebito() {
@@ -212,12 +217,13 @@
         alert("Pago con tarjeta de débito listo para procesar.");
     }
 
-    // Cerrar modal si se hace clic afuera
+    function seleccionarEfectivo() {
+        metodoInput.value = "efectivo";
+    }
+
     window.onclick = function(event) {
         const modals = [document.getElementById("modalCredito"), document.getElementById("modalDebito")];
-        modals.forEach(m => {
-            if (event.target === m) m.style.display = "none";
-        });
+        modals.forEach(m => { if (event.target === m) m.style.display = "none"; });
     };
 </script>
 

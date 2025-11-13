@@ -47,10 +47,11 @@ public class PagoController {
 
         // Validar número de tarjeta si corresponde
         if ((metodoPago.equals("credito") || metodoPago.equals("debito")) &&
-                (numeroTarjeta == null || !numeroTarjeta.matches("\\d{16}"))) {
+                (!numeroTarjeta.replaceAll("\\s+", "").matches("\\d{16}"))) {
             model.addAttribute("error", "Número de tarjeta inválido. Debe tener 16 dígitos.");
             model.addAttribute("total", total);
             model.addAttribute("direccion", usuario.getAddress());
+            model.addAttribute("metodoPago", metodoPago);
             return "pago_seleccionar";
         }
 
@@ -67,7 +68,10 @@ public class PagoController {
                 mensaje = "Pago contra entrega — efectivo.";
                 break;
             default:
-                mensaje = "Método de pago no reconocido.";
+                model.addAttribute("error", "Método de pago no reconocido.");
+                model.addAttribute("total", total);
+                model.addAttribute("direccion", usuario.getAddress());
+                return "pago_seleccionar";
         }
 
         // Crear y guardar el pedido
