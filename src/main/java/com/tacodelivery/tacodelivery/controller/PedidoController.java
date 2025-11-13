@@ -48,7 +48,7 @@ public class PedidoController {
         if (usuario == null) {
             model.addAttribute("aviso", "Debes iniciar sesión para agregar al carrito.");
             model.addAttribute("tacos", tacoService.listarTacos());
-            return "menu";
+            return "redirect:/menu?loginRequerido=true";
         }
 
         Optional<Taco> base = tacoService.listarTacos().stream()
@@ -60,13 +60,14 @@ public class PedidoController {
         return "redirect:/menu/carrito";
     }
 
-    // Mostrar carrito
+    // Ver carrito
     @GetMapping("/carrito")
     public String verCarrito(Model model, @SessionAttribute(name = "usuario", required = false) User usuario) {
         if (usuario == null) {
-            model.addAttribute("aviso", "Debes iniciar sesión para ver el carrito.");
-            model.addAttribute("tacos", tacoService.listarTacos());
-            return "menu";
+            // Limpiar cualquier dato residual del modelo
+            model.asMap().clear();
+            // Redirigir con parámetro para mostrar aviso limpio
+            return "redirect:/menu?loginRequerido=true";
         }
 
         List<ItemCarrito> carrito = itemCarritoService.obtenerItemsPorUsuario(usuario);
@@ -74,7 +75,7 @@ public class PedidoController {
 
         model.addAttribute("carrito", carrito);
         model.addAttribute("total", total);
-        model.addAttribute("tacosDisponibles", tacoService.listarTacos());
+        model.addAttribute("tacos", tacoService.listarTacos());
         return "carrito";
     }
 

@@ -22,10 +22,12 @@
     </div>
 </header>
 
-<!-- Aviso si el usuario intenta agregar sin loguearse -->
-<div th:if="${aviso}" class="aviso-login" style="margin: 15px 0;">
-    <p th:text="${aviso}" style="color:red; font-weight:bold;"></p>
-    <a href="/login" class="btn-login" style="display:inline-block; padding: 8px 12px; background-color:#007bff; color:white; text-decoration:none; border-radius:5px; margin-top:5px;">
+<!-- Aviso si el usuario no está logueado -->
+<div th:if="${param.loginRequerido}" class="aviso-login" style="margin: 15px 0;">
+    <p style="color:red; font-weight:bold;">Debes iniciar sesión para ver el carrito.</p>
+    <a href="/login" class="btn-login"
+       style="display:inline-block; padding: 8px 12px; background-color:#007bff; color:white;
+              text-decoration:none; border-radius:5px; margin-top:5px;">
         Ir a Login
     </a>
 </div>
