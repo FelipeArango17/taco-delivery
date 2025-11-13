@@ -12,39 +12,47 @@ public class Pedido {
     private Long id;
 
     private String direccionEntrega;
-    private double total;
-
-    @Column(name = "metodo_pago")
-    private String metodoPago; // "Tarjeta de crédito", "Tarjeta de débito", "Efectivo"
-
+    private String estado;
     private LocalDateTime fechaPedido;
+    private String metodoPago;
+    private Double total;
 
-    private String estado; // "PENDIENTE", "PAGADO", "ENTREGADO"
+    // Campos nuevos para el pago
+    private String numeroTarjeta;
+    private String titularTarjeta;
+    private String cuotas;
+    private String emailUsuario;
 
     public Pedido() {}
 
-    public Pedido(String direccionEntrega, double total, String metodoPago) {
-        this.direccionEntrega = direccionEntrega;
-        this.total = total;
-        this.metodoPago = metodoPago;
-        this.fechaPedido = LocalDateTime.now();
-        this.estado = "PENDIENTE";
-    }
-
-    // Getters y setters
+    // Getters y setters para TODOS los campos
     public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
     public String getDireccionEntrega() { return direccionEntrega; }
     public void setDireccionEntrega(String direccionEntrega) { this.direccionEntrega = direccionEntrega; }
 
-    public double getTotal() { return total; }
-    public void setTotal(double total) { this.total = total; }
-
-    public String getMetodoPago() { return metodoPago; }
-    public void setMetodoPago(String metodoPago) { this.metodoPago = metodoPago; }
+    public String getEstado() { return estado; }
+    public void setEstado(String estado) { this.estado = estado; }
 
     public LocalDateTime getFechaPedido() { return fechaPedido; }
     public void setFechaPedido(LocalDateTime fechaPedido) { this.fechaPedido = fechaPedido; }
 
-    public String getEstado() { return estado; }
-    public void setEstado(String estado) { this.estado = estado; }
+    public String getMetodoPago() { return metodoPago; }
+    public void setMetodoPago(String metodoPago) { this.metodoPago = metodoPago; }
+
+    public Double getTotal() { return total; }
+    public void setTotal(Double total) { this.total = total; }
+
+    public String getNumeroTarjeta() { return numeroTarjeta; }
+    public void setNumeroTarjeta(String numeroTarjeta) { this.numeroTarjeta = numeroTarjeta; }
+
+    public String getTitularTarjeta() { return titularTarjeta; }
+    public void setTitularTarjeta(String titularTarjeta) { this.titularTarjeta = titularTarjeta; }
+
+    public String getCuotas() { return cuotas; }
+    public void setCuotas(String cuotas) { this.cuotas = cuotas; }
+
+    public String getEmailUsuario() { return emailUsuario; }
+    public void setEmailUsuario(String emailUsuario) { this.emailUsuario = emailUsuario; }
 }

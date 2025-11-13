@@ -21,7 +21,7 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
-        h2 {
+        h1, h2 {
             text-align: center;
             color: #512da8;
         }
@@ -59,10 +59,10 @@
 
         .modal-content {
             background-color: white;
-            margin: 15% auto;
-            padding: 20px;
+            margin: 10% auto;
+            padding: 25px;
             border-radius: 12px;
-            width: 300px;
+            width: 350px;
             text-align: center;
         }
 
@@ -72,6 +72,29 @@
             cursor: pointer;
             color: #888;
         }
+
+        input[type="text"], select {
+            width: 90%;
+            padding: 8px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #512da8;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3e2284;
+        }
+        .error { color: #b00020; font-size: 0.9rem; margin-top: 6px; }
+        .input-invalid { border-color: #b00020; }
     </style>
 </head>
 <body>
@@ -82,17 +105,19 @@
 
 <div class="contenedor">
     <h2>Elige tu método de pago</h2>
-    <form th:action="@{/pago/procesar}" method="post">
+    <form th:action="@{/pago/procesar}" method="post" id="formPago">
         <input type="hidden" name="total" th:value="${total}">
+        <input type="hidden" name="metodoPago" id="metodoPago">
+        <input type="hidden" name="cuotas" id="cuotas">
+        <input type="hidden" name="numeroTarjeta" id="numeroTarjeta">
+        <input type="hidden" name="titularTarjeta" id="titularTarjeta">
 
-        <div class="metodo">
-            <input type="radio" name="metodoPago" value="credito" id="credito" required>
-            <label for="credito">Tarjeta de Crédito</label>
+        <div class="metodo" onclick="abrirModal('credito')">
+            <label>Tarjeta de Crédito</label>
         </div>
 
-        <div class="metodo">
-            <input type="radio" name="metodoPago" value="debito" id="debito">
-            <label for="debito">Tarjeta de Débito</label>
+        <div class="metodo" onclick="abrirModal('debito')">
+            <label>Tarjeta de Débito</label>
         </div>
 
         <div class="metodo">
@@ -100,16 +125,18 @@
             <label for="efectivo">Pago contra entrega (efectivo)</label>
         </div>
 
-        <input type="hidden" name="cuotas" id="cuotas">
         <button type="submit" class="btn-confirmar">Confirmar pago</button>
     </form>
 </div>
 
-<!-- Modal de cuotas -->
-<div class="modal" id="modalCuotas">
+<!-- Modal TARJETA DE CRÉDITO -->
+<div class="modal" id="modalCredito">
     <div class="modal-content">
-        <span class="close" onclick="cerrarModal()">&times;</span>
-        <h3>Seleccione el número de cuotas</h3>
+        <span class="close" onclick="cerrarModal('modalCredito')">&times;</span>
+        <h3>Datos de Tarjeta de Crédito</h3>
+        <input type="text" id="numCredito" placeholder="Número de tarjeta" maxlength="16" required>
+        <input type="text" id="titularCredito" placeholder="Titular de la tarjeta" required>
+        <label>Seleccione el número de cuotas:</label>
         <select id="selectCuotas">
             <option value="1">1 cuota</option>
             <option value="3">3 cuotas</option>
@@ -117,34 +144,81 @@
             <option value="12">12 cuotas</option>
         </select>
         <br><br>
-        <button onclick="aceptarCuotas()">Aceptar</button>
+        <button onclick="aceptarCredito()">Aceptar</button>
+    </div>
+</div>
+
+<!-- Modal TARJETA DE DÉBITO -->
+<div class="modal" id="modalDebito">
+    <div class="modal-content">
+        <span class="close" onclick="cerrarModal('modalDebito')">&times;</span>
+        <h3>Datos de Tarjeta de Débito</h3>
+        <input type="text" id="numDebito" placeholder="Número de tarjeta" maxlength="16" required>
+        <input type="text" id="titularDebito" placeholder="Titular de la tarjeta" required>
+        <br><br>
+        <button onclick="aceptarDebito()">Aceptar</button>
     </div>
 </div>
 
 <script>
-    const credito = document.getElementById('credito');
-    const modal = document.getElementById('modalCuotas');
-    const cuotasInput = document.getElementById('cuotas');
+    const metodoInput = document.getElementById("metodoPago");
+    const cuotasInput = document.getElementById("cuotas");
+    const numTarjetaInput = document.getElementById("numeroTarjeta");
+    const titularInput = document.getElementById("titularTarjeta");
 
-    credito.addEventListener('change', () => {
-        modal.style.display = 'block';
-    });
-
-    function cerrarModal() {
-        modal.style.display = 'none';
-        credito.checked = false;
+    function abrirModal(tipo) {
+        if (tipo === "credito") document.getElementById("modalCredito").style.display = "block";
+        else if (tipo === "debito") document.getElementById("modalDebito").style.display = "block";
     }
 
-    function aceptarCuotas() {
-        const seleccion = document.getElementById('selectCuotas').value;
-        cuotasInput.value = seleccion;
-        modal.style.display = 'none';
-        alert('Pago con tarjeta de crédito a ' + seleccion + ' cuotas seleccionado.');
+    function cerrarModal(id) {
+        document.getElementById(id).style.display = "none";
     }
 
+    function aceptarCredito() {
+        const num = document.getElementById("numCredito").value.trim();
+        const tit = document.getElementById("titularCredito").value.trim();
+        const cuotas = document.getElementById("selectCuotas").value;
+
+        if (!num || !tit) {
+            alert("Por favor complete todos los campos.");
+            return;
+        }
+
+        metodoInput.value = "credito";
+        cuotasInput.value = cuotas;
+        numTarjetaInput.value = num;
+        titularInput.value = tit;
+
+        cerrarModal("modalCredito");
+        alert("Pago con tarjeta de crédito (" + cuotas + " cuotas) listo para procesar.");
+    }
+
+    function aceptarDebito() {
+        const num = document.getElementById("numDebito").value.trim();
+        const tit = document.getElementById("titularDebito").value.trim();
+
+        if (!num || !tit) {
+            alert("Por favor complete todos los campos.");
+            return;
+        }
+
+        metodoInput.value = "debito";
+        cuotasInput.value = "1";
+        numTarjetaInput.value = num;
+        titularInput.value = tit;
+
+        cerrarModal("modalDebito");
+        alert("Pago con tarjeta de débito listo para procesar.");
+    }
+
+    // Cerrar modal si se hace clic afuera
     window.onclick = function(event) {
-        if (event.target === modal) modal.style.display = 'none';
-    }
+        const modals = [document.getElementById("modalCredito"), document.getElementById("modalDebito")];
+        modals.forEach(m => {
+            if (event.target === m) m.style.display = "none";
+        });
+    };
 </script>
 
 <div th:replace="fragments/footer :: footer"></div>

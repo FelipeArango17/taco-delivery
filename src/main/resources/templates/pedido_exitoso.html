@@ -5,6 +5,7 @@
     <title>Pedido Exitoso</title>
     <link rel="stylesheet" th:href="@{/pedido_exitoso.css}">
     <link rel="stylesheet" th:href="@{/footer.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 <header>
@@ -14,7 +15,28 @@
 
 <main>
     <div class="carrito-container">
-        <p th:text="${mensaje}"></p>
+
+        <!-- Mensaje principal -->
+        <p class="mensaje-exito">
+            <i class="fa-solid fa-check-circle" style="color: green;"></i>
+            <span th:text="${mensaje}"></span>
+        </p>
+
+        <!-- Información de entrega y pago -->
+        <div class="info-entrega">
+            <p><strong>Dirección de entrega:</strong> <span th:text="${direccion}"></span></p>
+            <p><strong>Método de pago:</strong>
+                <span th:if="${metodoPago == 'credito'}">Tarjeta de crédito</span>
+                <span th:if="${metodoPago == 'debito'}">Tarjeta de débito</span>
+                <span th:if="${metodoPago == 'efectivo'}">Efectivo contra entrega</span>
+            </p>
+            <!-- Si deseas mostrar los últimos 4 dígitos -->
+            <p th:if="${numeroTarjeta != null}">
+                <strong>Tarjeta:</strong> **** **** **** <span th:text="${numeroTarjeta.substring(numeroTarjeta.length() - 4)}"></span>
+            </p>
+        </div>
+
+        <!-- Detalles del pedido -->
         <div class="pedido-detalles">
             <h2>Detalles del pedido</h2>
             <table>
@@ -30,11 +52,12 @@
                 <tr th:each="item : ${productos}">
                     <td th:text="${item.taco.nombre}"></td>
                     <td th:text="${item.cantidad}"></td>
-                    <td th:text="${item.taco.precio} + ' $'"></td>
-                    <td th:text="${item.subtotal} + ' $'"></td>
+                    <td th:text="${#numbers.formatDecimal(item.taco.precio, 0, 0)} + ' COP'"></td>
+                    <td th:text="${#numbers.formatDecimal(item.subtotal, 0, 0)} + ' COP'"></td>
                 </tr>
                 </tbody>
             </table>
+
             <div class="total-pagar">
                 <h3>Total: <span th:text="${#numbers.formatDecimal(total, 0, 0)} + ' COP'"></span></h3>
             </div>
